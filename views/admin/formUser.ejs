@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= pageTitle %>
+    </title>
+    <style>
+        /* Form styling */
+        
+        form {
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        /* Input styling */
+        
+        input[type="text"],
+        input[type="contact"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+        /* Label styling */
+        
+        label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        /* Submit button styling */
+        
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        /* Table header styling */
+        
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+        /* Table data styling */
+        
+        td,
+        th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        /* Delete button styling */
+        
+        .delete-btn {
+            background-color: #f44336;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .delete-btn:hover {
+            background-color: #ff3333;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/add-user" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="contact">Contact:</label>
+        <input type="text" id="contact" name="contact" required>
+
+        <input type="submit" value="Submit">
+    </form>
+    <form action="/search" method="POST">
+        <input type="text" id="search-bar" name="search" placeholder="Search...">
+        <button type="submit" id="search-button">Search</button>
+    </form>
+    <% if(users.length > 0){ %>
+        <table>
+            <tr>
+                <th>Serial Number</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Delete</th>
+            </tr>
+            <%for(let user of users){%>
+                <tr>
+                    <td>
+                        <%=user.id%>
+                    </td>
+                    <td>
+                        <%= user.name%>
+                    </td>
+                    <td>
+                        <%=user.contact%>
+                    </td>
+                    <form action="/delete-user" method="POST">
+                        <input type="hidden" value="<%= user._id %>" name="productId">
+                        <td>
+                            <button class="btn" class="delete-btn" type="submit">Delete</button>
+                        </td>
+                    </form>
+                </tr>
+                <%}%>
+        </table>
+        <%}else{%>
+            <h1>No Users Found!</h1>
+            <% } %>
+</body>
+
+</html>
