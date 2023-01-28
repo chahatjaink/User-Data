@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-const MONGODB_URI = 'mongodb+srv://node_complete:poquTpfHh0WKdP77@cluster0.u6qsphc.mongodb.net/shop?retryWrites=true&w=majority';
+const MONGODB_URI = 'mongodb+srv://node_complete:%password%@cluster0.u6qsphc.mongodb.net/shop?retryWrites=true&w=majority';
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 const adminRoutes = require('./routes/admin')
